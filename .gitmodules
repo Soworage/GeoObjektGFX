@@ -1,0 +1,12 @@
+[submodule "CImg"]
+	path = CImg
+	url = https://github.com/GreycLab/CImg.git
+[submodule "GeoObjektGFXTest"]
+	path = GeoObjektGFXTest
+	url = https://gitlab.hs-osnabrueck.de/prog2/praktikum/stud/GeoObjektGFXTest.git
+[submodule "googletest"]
+	path = googletest
+	url = https://github.com/google/googletest.git
+[submodule "MemoryMonitor"]
+	path = MemoryMonitor
+	url = https://gitlab.hs-osnabrueck.de/tischroe/MemoryMonitor.git
