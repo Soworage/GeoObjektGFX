@@ -6,13 +6,18 @@ set(CMAKE_CXX_STANDARD 14)
 add_executable(GeoObjektGFXDemo GeoObjektGFXTest/GeoObjektGFXDemo.cpp GeoObjektGFX.cpp GeoObjektGFX.h Pinsel.cpp Pinsel.h Position.hpp)
 
 target_link_libraries(GeoObjektGFXDemo -lpthread)
-target_link_libraries(GeoObjektGFXDemo -lX11)
+
+if(WIN32)
+    target_link_libraries(GeoObjektGFXDemo -lgdi32)
+else()
+    target_link_libraries(GeoObjektGFXDemo -lX11)
+endif()
 
 enable_testing()
 include(GoogleTest)
 add_subdirectory(googletest)
 
-add_executable(GeoObjektGFXTest GeoObjektGFX.cpp GeoObjektGFX.h MemoryMonitor/MemoryMonitor.cpp MemoryMonitor/MemoryMonitor.hpp GeoObjektGFXTest/GeoObjektGFXDemo.cpp)
+add_executable(GeoObjektGFXTest GeoObjektGFX.cpp GeoObjektGFX.h Pinsel.cpp Pinsel.h MemoryMonitor/MemoryMonitor.cpp MemoryMonitor/MemoryMonitor.hpp)
 target_link_libraries(GeoObjektGFXTest gtest gtest_main)
 gtest_discover_tests(GeoObjektGFXTest)
 
