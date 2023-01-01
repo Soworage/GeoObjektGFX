@@ -11,7 +11,7 @@ class Pinsel {
 class PinselFarbe {
 };
 
-class PinselFarbeTransparent : public PinselFarbe {
+class PinselFarbeTransparent {
 };
 
 class PinselInverter {
