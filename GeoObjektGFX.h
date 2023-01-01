@@ -6,6 +6,10 @@
 using cimg_library::CImg;
 
 class GeoObjektGFX {
+
+public:
+    void zeichne(CImg<unsigned char>& img);
+
 };
 
 class Rechteck {
