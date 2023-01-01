@@ -17,7 +17,7 @@ enable_testing()
 include(GoogleTest)
 add_subdirectory(googletest)
 
-add_executable(GeoObjektGFXTest GeoObjektGFX.cpp GeoObjektGFX.h Pinsel.cpp Pinsel.h MemoryMonitor/MemoryMonitor.cpp MemoryMonitor/MemoryMonitor.hpp)
+add_executable(GeoObjektGFXTest GeoObjektGFX.cpp GeoObjektGFX.h Pinsel.cpp Pinsel.h Position.hpp MemoryMonitor/MemoryMonitor.cpp MemoryMonitor/MemoryMonitor.hpp GeoObjektGFXTest/GeoObjektGFXTest.cpp)
 target_link_libraries(GeoObjektGFXTest gtest gtest_main)
 gtest_discover_tests(GeoObjektGFXTest)
 
