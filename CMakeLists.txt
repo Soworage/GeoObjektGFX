@@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 3.16)
 project(GeoObjektGFX)
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(GeoObjektGFXDemo GeoObjektGFXTest/GeoObjektGFXDemo.cpp GeoObjektGFX.cpp GeoObjektGFX.h Pinsel.cpp Pinsel.h Position.hpp)
+add_subdirectory(CSimpleCanvas)
+add_executable(GeoObjektGFXDemo GeoObjektGFXTest/GeoObjektGFXDemo.cpp GeoObjektGFX.cpp Pinsel.cpp)
+target_link_libraries(GeoObjektGFXDemo CSimpleCanvas)
 
 enable_testing()
 include(GoogleTest)
 add_subdirectory(googletest)
 
-add_executable(GeoObjektGFXTest GeoObjektGFX.cpp GeoObjektGFX.h Pinsel.h Pinsel.cpp MemoryMonitor/MemoryMonitor.cpp MemoryMonitor/MemoryMonitor.hpp GeoObjektGFXTest/GeoObjektGFXTest.cpp)
-target_link_libraries(GeoObjektGFXTest gtest gtest_main)
+add_executable(GeoObjektGFXTest GeoObjektGFX.cpp Pinsel.cpp MemoryMonitor/MemoryMonitor.cpp GeoObjektGFXTest/GeoObjektGFXTest.cpp)
+target_link_libraries(GeoObjektGFXTest gtest gtest_main CSimpleCanvas)
 gtest_discover_tests(GeoObjektGFXTest)
 
 target_link_libraries(GeoObjektGFXDemo -lpthread)

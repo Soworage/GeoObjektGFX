@@ -1,14 +1,12 @@
 #pragma once
-#include "CImg/CImg.h"
+#include "CSimpleCanvas.h"
 #include "Position.hpp"
 #include "Pinsel.h"
-
-using cimg_library::CImg;
 
 class GeoObjektGFX {
 
 public:
-    void zeichne(CImg<unsigned char>& img);
+    void zeichne(CSimpleCanvas& canvas);
 
 };
 

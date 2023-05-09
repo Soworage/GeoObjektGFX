@@ -7,3 +7,6 @@
 [submodule "MemoryMonitor"]
 	path = MemoryMonitor
 	url = https://gitlab.hs-osnabrueck.de/tischroe/MemoryMonitor.git
+[submodule "CSimpleCanvas"]
+	path = CSimpleCanvas
+	url = https://gitlab.hs-osnabrueck.de/tischroe/CSimpleCanvas.git

@@ -1,9 +1,7 @@
 #pragma once
 
-#include "CImg/CImg.h"
+#include "CSimpleCanvas.h"
 #include "Position.hpp"
-
-using cimg_library::CImg;
 
 class Pinsel {
 };
