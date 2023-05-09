@@ -1,6 +1,3 @@
-[submodule "CImg"]
-	path = CImg
-	url = https://github.com/GreycLab/CImg.git
 [submodule "GeoObjektGFXTest"]
 	path = GeoObjektGFXTest
 	url = https://gitlab.hs-osnabrueck.de/prog2/praktikum/stud/GeoObjektGFXTest.git
