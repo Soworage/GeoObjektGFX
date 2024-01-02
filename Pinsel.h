@@ -4,64 +4,94 @@
 #include "Position.hpp"
 #include "CSimpleCanvas.h"
 
+// Die abstrakte Basisklasse Pinsel
 class Pinsel {
 public:
-    Pinsel(const Pinsel&){}
-    // Verhindern Sie die Nutzung des Zuweisungsoperators
+    // Kopierkonstruktor (nicht implementiert, um die Verwendung zu verhindern)
+    Pinsel(const Pinsel&) {}
+
+    // Löschen des Zuweisungsoperators (um die Verwendung zu verhindern)
     Pinsel& operator=(const Pinsel&) = delete;
+
+    // Reine virtuelle Methode zum Malen auf der Canvas an einer bestimmten Position
     virtual void male(CSimpleCanvas& canvas, const Position& pos) const = 0;
-    virtual ~Pinsel(){
 
-    }
+    // Virtueller Destruktor
+    virtual ~Pinsel() {}
 
+    // Reine virtuelle Methode zum Klonen des Pinsels
     virtual Pinsel* clone() const = 0;
 };
-
+// Die konkrete Klasse PinselFarbe, die von Pinsel erbt
 class PinselFarbe : public Pinsel {
 protected:
-    unsigned char r, g, b;
+    unsigned char r, g, b;  // Farbwerte (Rot, Grün, Blau)
+
 public:
-    PinselFarbe(unsigned char r, unsigned char g, unsigned char b) : Pinsel(*this),r(r), g(g), b(b) {
-    }
+    // Konstruktor mit Farbwerten als Parameter
+    PinselFarbe(unsigned char r, unsigned char g, unsigned char b)
+            : Pinsel(*this), r(r), g(g), b(b) {}
 
-    virtual ~PinselFarbe(){
+    // Virtueller Destruktor
+    ~PinselFarbe() override = default;
 
-    }
+    // Implementierung der male-Methode
+    void male(CSimpleCanvas& canvas, const Position& pos) const override;
 
-    virtual void male(CSimpleCanvas& canvas, const Position& pos) const override;
+    // Implementierung der clone-Methode
     PinselFarbe* clone() const override { return new PinselFarbe(*this); }
 };
 
-class PinselFarbeAddierer : public PinselFarbe {
+// Die konkrete Klasse PinselFarbeAddierer, die von PinselFarbe erbt
+class PinselAddierer : public PinselFarbe {
 public:
-    PinselFarbeAddierer(unsigned char r, unsigned char g, unsigned char b) : PinselFarbe(r, g, b) {}
+    // Konstruktor mit Farbwerten als Parameter
+    PinselAddierer(unsigned char r, unsigned char g, unsigned char b) : PinselFarbe(r, g, b) {}
+    // Implementierung der male-Methode
     virtual void male(CSimpleCanvas& canvas, const Position& pos) const override;
-    PinselFarbeAddierer* clone() const override{ return new PinselFarbeAddierer(*this); }
-    virtual ~PinselFarbeAddierer(){
+    // Implementierung der clone-Methode
+    PinselAddierer* clone() const override{ return new PinselAddierer(*this); }
 
-    }
+    // Virtueller Destruktor
+    ~PinselAddierer() override {}
 };
 
+
+// Die konkrete Klasse PinselFarbeTransparent, die von PinselFarbe erbt
 class PinselFarbeTransparent : public PinselFarbe {
 private:
-    double t;
-public:
-    PinselFarbeTransparent(unsigned char r, unsigned char g, unsigned char b, double t) : PinselFarbe(r, g, b), t(t) {}
-    virtual void male(CSimpleCanvas& canvas, const Position& pos) const override;
-    PinselFarbeTransparent* clone() const override { return new PinselFarbeTransparent(*this); }
-    virtual ~PinselFarbeTransparent(){
+    double t;  // Transparenzwert
 
-    }
+public:
+    // Konstruktor mit Farbwerten und Transparenzwert als Parameter
+    PinselFarbeTransparent(unsigned char r, unsigned char g, unsigned char b, double t)
+            : PinselFarbe(r, g, b), t(t) {}
+
+    // Implementierung der male-Methode
+    void male(CSimpleCanvas& canvas, const Position& pos) const override;
+
+    // Implementierung der clone-Methode
+    PinselFarbeTransparent* clone() const override { return new PinselFarbeTransparent(*this); }
+
+    // Virtueller Destruktor
+    ~PinselFarbeTransparent() override = default;
 };
 
+
+// Die konkrete Klasse PinselInverter, die von Pinsel erbt
 class PinselInverter : public Pinsel {
 public:
-    PinselInverter(): Pinsel(*this) {}
-    virtual void male(CSimpleCanvas& canvas, const Position& pos) const override;
-    PinselInverter* clone() const override { return new PinselInverter(*this); }
-    virtual ~PinselInverter(){
+    // Standardkonstruktor
+    PinselInverter() : Pinsel(*this) {}
 
-    }
+    // Implementierung der male-Methode
+    void male(CSimpleCanvas& canvas, const Position& pos) const override;
+
+    // Implementierung der clone-Methode
+    PinselInverter* clone() const override { return new PinselInverter(*this); }
+
+    // Virtueller Destruktor
+    ~PinselInverter() override = default;
 };
 
 #endif // PINSEL_H
